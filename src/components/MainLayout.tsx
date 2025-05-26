@@ -1,9 +1,5 @@
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <div className="flex justify-center">
-            <div className="w-7xl h-screen"> {children}</div>
-        </div>
-    );
+    return <section className="w-7xl mx-auto"> {children}</section>;
 };
 
 export default MainLayout;

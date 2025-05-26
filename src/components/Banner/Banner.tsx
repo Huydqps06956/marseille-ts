@@ -3,7 +3,7 @@ import BannerImage from '@assets/images/banner.png';
 import Button from '@components/Button';
 const Banner: React.FC = () => {
     return (
-        <div
+        <section
             className="min-h-[750px] bg-no-repeat bg-cover flex items-center justify-center text-center bg-center"
             style={{ backgroundImage: `url(${BannerImage})` }}
         >
@@ -18,13 +18,13 @@ const Banner: React.FC = () => {
                 <div className="pt-4">
                     <Button
                         size="sm"
-                        className="py-3 px-11 rounded-sm border border-priamry hover:bg-[#FFFFFF00] hover:text-primary duration-300"
+                        className="py-3 px-11 rounded-sm border border-primary hover:bg-[#FFFFFF00] hover:text-primary duration-300"
                     >
                         Go to shop
                     </Button>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
