@@ -9,7 +9,7 @@ import { SlHeart, SlReload } from 'react-icons/sl';
 
 const Header = () => {
     return (
-        <header className="bg-orange-100">
+        <header className="absolute top-0 left-0 right-0">
             <div className="w-7xl mx-auto flex items-center justify-between p-4">
                 <div className="flex flex-1 items-center justify-between gap-4">
                     <div className="flex items-center justify-center gap-2">

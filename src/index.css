@@ -8,6 +8,7 @@
     --color-secondary: oklch(0.63 0 0);
     --color-third: oklch(0.45 0 0);
     --color-four: oklch(0.37 0 0);
+    --color-title: oklch(0.25 0 0);
 }
 
 @layer base {
