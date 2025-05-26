@@ -9,12 +9,12 @@
     --color-third: oklch(0.45 0 0);
     --color-four: oklch(0.37 0 0);
     --color-title: oklch(0.25 0 0);
+    --color-five: oklch(0.55 0 0);
 }
 
 @layer base {
     html {
         font-family: 'Roboto Mono', monospace;
-        font-weight: 300;
         color: var(--color-primary);
     }
 }

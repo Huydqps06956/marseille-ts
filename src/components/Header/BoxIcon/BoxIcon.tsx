@@ -6,7 +6,7 @@ const BoxIcon: React.FC<BoxI> = ({ icon, href, title }) => {
             title={title}
             className="rounded-full border-primary border p-[6px]  bg-primary text-white text-xs"
         >
-            {icon}
+            <div>{icon}</div>
         </div>
     );
 };
