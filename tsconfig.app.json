@@ -29,7 +29,8 @@
             "@types/*": ["src/type/*"],
             "@constants/*": ["src/constants/*"],
             "@pages/*": ["src/pages/*"],
-            "@api/*": ["src/api/*"]
+            "@api/*": ["src/api/*"],
+            "@hooks/*": ["src/hooks/*"]
         }
     },
     "include": ["src"]

@@ -9,7 +9,7 @@ interface AdvanceHeadlineI {
 const AdvanceHeadline: React.FC<AdvanceHeadlineI> = ({ title, subTitle }) => {
     return (
         <MainLayout>
-            <div className="mt-16 mb-4 text-center p-4">
+            <div className="mt-16 mb-4 text-center py-4">
                 <span className="uppercase text-[14px]/7 text-third font-light">
                     {subTitle}
                 </span>

@@ -1,15 +1,13 @@
+import { productApi, type ProductsRequest } from '@api/productService';
 import AdvanceHeading from '@components/AdvanceHeadline/AdvanceHeadline';
 import Banner from '@components/Banner/Banner';
+import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
 import HeadingListProducts from '@components/HeadingListProducts/HeadingListProducts';
 import Info from '@components/Info/Info';
-import React, { useEffect, useState } from 'react';
-import {
-    productApi,
-    type ProductsRequest,
-    type ProductsResponse
-} from '@api/productService';
 import PopularProduct from '@components/PopularProduct/PopularProduct';
+import SaleHomePage from '@components/SaleHomePage/SaleHomePage';
+import React, { useEffect, useState } from 'react';
 const Home: React.FC = () => {
     const [listProducts, setListProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +18,6 @@ const Home: React.FC = () => {
             setIsLoading(true);
             setIsError(null);
             const res = await productApi.getProducts(query);
-            console.log(res);
             setListProducts(res.data.results);
         } catch (error: any) {
             setIsError(error.response?.data?.message || 'An error occurred.');
@@ -61,6 +58,8 @@ const Home: React.FC = () => {
                     />
                 </>
             )}
+            <SaleHomePage />
+            <Footer />
         </>
     );
 };
