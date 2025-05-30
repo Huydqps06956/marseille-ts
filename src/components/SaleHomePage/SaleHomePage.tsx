@@ -6,7 +6,7 @@ const SaleHomePage: React.FC = () => {
     const { translateXPosition } = useTranslateXImage();
 
     return (
-        <section className="my-20 flex justify-center">
+        <section className="my-20 flex justify-center overflow-hidden">
             <div
                 className="w-2/5 flex justify-center transition-all duration-100 ease-linear"
                 style={{
