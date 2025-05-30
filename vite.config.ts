@@ -18,7 +18,8 @@ export default defineConfig({
             '@store': resolve(__dirname, 'src/store'),
             '@types': resolve(__dirname, 'src/types'),
             '@constants': resolve(__dirname, 'src/constants'),
-            '@api': resolve(__dirname, 'src/api')
+            '@api': resolve(__dirname, 'src/api'),
+            '@router': resolve(__dirname, 'src/router')
         }
     }
 });

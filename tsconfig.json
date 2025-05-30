@@ -12,7 +12,8 @@
             "@store/*": ["src/store/*"],
             "@constants/*": ["src/constants/*"],
             "@types/*": ["src/type/*"],
-            "@api/*": ["src/api/*"]
+            "@api/*": ["src/api/*"],
+            "@router/*": ["src/router/*"]
         }
     },
     "files": [],
