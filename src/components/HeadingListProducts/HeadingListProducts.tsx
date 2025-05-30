@@ -3,7 +3,10 @@ import MainLayout from '@components/MainLayout';
 import ProductItem from '@components/ProductItem/ProductItem';
 import type React from 'react';
 
-const HeadingListProducts: React.FC<any> = ({ listProducts }) => {
+export interface IListProducts {
+    listProducts: Product[];
+}
+const HeadingListProducts: React.FC<IListProducts> = ({ listProducts }) => {
     return (
         <MainLayout>
             <div className="grid grid-cols-2 justify-between gap-[15px]">

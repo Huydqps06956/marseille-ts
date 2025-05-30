@@ -4,7 +4,7 @@ import { CiBag1, CiHeart } from 'react-icons/ci';
 import { IoIosGitCompare } from 'react-icons/io';
 import { IoEyeOutline } from 'react-icons/io5';
 
-const ProductItem: React.FC<any> = ({ name, price, images }) => {
+const ProductItem: React.FC<Product> = ({ name, price, images }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
