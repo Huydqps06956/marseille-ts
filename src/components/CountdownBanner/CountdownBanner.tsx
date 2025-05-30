@@ -1,13 +1,12 @@
-import React from 'react';
 import CDBanner from '@assets/images/cd-banner.png';
-import CountdownTimer from '@components/CountdownTimer/CountdownTimer';
 import Button from '@components/Button';
+import CountdownTimer from '@components/CountdownTimer/CountdownTimer';
 const targetDate = '2025-07-31T23:59:59';
 
 const CountdownBanner = () => {
     return (
         <div
-            className="h-[400px] flex-1 bg-no-repeat bg-cover bg-center"
+            className="p-2  bg-no-repeat bg-cover bg-center"
             style={{ backgroundImage: `url(${CDBanner})` }}
         >
             <div className="flex items-center justify-center gap-[10px] mb-5">
@@ -18,7 +17,7 @@ const CountdownBanner = () => {
             </h2>
             <Button
                 size="sm"
-                className="py-3 px-11 rounded-sm border border-primary hover:bg-[#FFFFFF00] hover:text-primary duration-300 block mx-auto"
+                className="py-3 px-11 rounded-sm border border-primary hover:bg-[#FFFFFF00] hover:text-primary duration-300 block mx-auto mb-[110px]"
             >
                 Buy now
             </Button>

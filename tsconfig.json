@@ -11,7 +11,8 @@
             "@context/*": ["src/context/*"],
             "@store/*": ["src/store/*"],
             "@constants/*": ["src/constants/*"],
-            "@types/*": ["src/@types/*"]
+            "@types/*": ["src/type/*"],
+            "@api/*": ["src/api/*"]
         }
     },
     "files": [],

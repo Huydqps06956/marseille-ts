@@ -50,7 +50,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
             timerComponents.push(
                 <span
                     key={interval}
-                    className="bg-white p-[10px] text-lg rounded-sm  inline-flex justify-between items-center gap-2"
+                    className="bg-white p-2 text-lg rounded-sm  inline-flex justify-between items-center gap-2"
                 >
                     {formatNumber(timeLeft[interval] as number)}
                     <span className="text-lg text-secondary">{interval}</span>

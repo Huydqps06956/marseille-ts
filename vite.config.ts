@@ -16,8 +16,9 @@ export default defineConfig({
             '@context': resolve(__dirname, 'src/context'),
             '@pages': resolve(__dirname, 'src/pages'),
             '@store': resolve(__dirname, 'src/store'),
-            '@types': resolve(__dirname, 'src/@types'),
-            '@constants': resolve(__dirname, 'src/constants')
+            '@types': resolve(__dirname, 'src/types'),
+            '@constants': resolve(__dirname, 'src/constants'),
+            '@api': resolve(__dirname, 'src/api')
         }
     }
 });

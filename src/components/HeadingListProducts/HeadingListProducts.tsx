@@ -1,15 +1,17 @@
 import CountdownBanner from '@components/CountdownBanner/CountdownBanner';
-import CountdownTimer from '@components/CountdownTimer/CountdownTimer';
 import MainLayout from '@components/MainLayout';
+import ProductItem from '@components/ProductItem/ProductItem';
+import type React from 'react';
 
-const HeadingListProducts = () => {
+const HeadingListProducts: React.FC<any> = ({ listProducts }) => {
     return (
         <MainLayout>
-            <div className="flex justify-between items-center gap-[15px]">
+            <div className="grid grid-cols-2 justify-between gap-[15px]">
                 <CountdownBanner />
-                <div className="flex-1">
-                    <div>1</div>
-                    <div>2</div>
+                <div className=" grid grid-cols-2 gap-5">
+                    {listProducts.map((product: any) => (
+                        <ProductItem key={product._id} {...product} />
+                    ))}
                 </div>
             </div>
         </MainLayout>
