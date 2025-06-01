@@ -1,13 +1,11 @@
-import { boxIcons } from '@constants/header/boxicon';
+import { useEffect, useMemo, useState } from 'react';
 import { dataMenus } from '@constants/header/menu';
-import BoxIcon from './BoxIcon/BoxIcon';
-import Menu from './Menu/Menu';
-
-import Logo from '@assets/images/logo.png';
-import { useEffect, useMemo, useRef, useState } from 'react';
 import { BsCart3 } from 'react-icons/bs';
 import { SlHeart, SlReload } from 'react-icons/sl';
-
+import Logo from '@assets/images/logo.png';
+import { boxIcons } from '@constants/header/boxicon';
+import BoxIcon from './BoxIcon/BoxIcon';
+import Menu from './Menu/Menu';
 import { motion, useAnimation } from 'framer-motion';
 import { useScrollHandling } from '@hooks/useScrollHandling';
 
@@ -18,7 +16,6 @@ const Header = () => {
 
     const leftMenus = useMemo(() => dataMenus.slice(0, 3), []);
     const rightMenus = useMemo(() => dataMenus.slice(3), []);
-
     useEffect(() => {
         if (scrollPosition >= 80 && !isFixed) {
             controls
@@ -35,6 +32,7 @@ const Header = () => {
             });
         }
     }, [scrollPosition]);
+
     return (
         <motion.header
             initial={{ y: 0 }}

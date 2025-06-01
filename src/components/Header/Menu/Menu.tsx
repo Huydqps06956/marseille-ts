@@ -7,8 +7,6 @@ interface IMenuProps {
 }
 
 const Menu: React.FC<IMenuProps> = ({ listMenu }) => {
-    console.log(listMenu);
-
     return (
         <div className="flex items-center justify-center gap-4">
             {listMenu.map((item, index) => {

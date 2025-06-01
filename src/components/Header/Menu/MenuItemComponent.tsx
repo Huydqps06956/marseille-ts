@@ -1,5 +1,5 @@
-import type { MenuItem } from '@constants/header/menu';
 import React from 'react';
+import type { MenuItem } from '@constants/header/menu';
 
 const MenuItemComponent: React.FC<MenuItem> = ({ href, title }) => {
     return (

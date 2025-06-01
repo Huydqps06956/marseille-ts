@@ -1,4 +1,3 @@
-import { productApi, type ProductsRequest } from '@api/productService';
 import AdvanceHeading from '@components/AdvanceHeadline/AdvanceHeadline';
 import Banner from '@components/Banner/Banner';
 import Footer from '@components/Footer/Footer';
@@ -7,32 +6,21 @@ import HeadingListProducts from '@components/HeadingListProducts/HeadingListProd
 import Info from '@components/Info/Info';
 import PopularProduct from '@components/PopularProduct/PopularProduct';
 import SaleHomePage from '@components/SaleHomePage/SaleHomePage';
-import React, { useEffect, useState } from 'react';
+import { useProducts } from '@hooks/useProducts';
+import React, { useMemo } from 'react';
 const Home: React.FC = () => {
-    const [listProducts, setListProducts] = useState<Product[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState<string | null>(null);
+    const { products, loading, error } = useProducts({
+        current: 1,
+        pageSize: 10
+    });
 
-    const fetchProducts = async (query: ProductsRequest) => {
-        try {
-            setIsLoading(true);
-            setIsError(null);
-            const res = await productApi.getProducts(query);
-            setListProducts(res.data.results);
-        } catch (error: any) {
-            setIsError(error.response?.data?.message || 'An error occurred.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        const query: ProductsRequest = {
-            current: 1,
-            pageSize: 10
-        };
-        fetchProducts(query);
-    }, []);
+    const { headingProducts, popularProducts } = useMemo(
+        () => ({
+            headingProducts: products.slice(0, 2),
+            popularProducts: products.slice(2)
+        }),
+        [products]
+    );
 
     return (
         <>
@@ -43,19 +31,14 @@ const Home: React.FC = () => {
                 title="Our best products"
                 subTitle="don't miss super offers"
             />
-            {isLoading ? (
-                'Loading...'
+            {loading ? (
+                <p className="text-center py-10">Loading...</p>
+            ) : error ? (
+                <p className="text-center text-red-500 py-10">{error}</p>
             ) : (
                 <>
-                    <HeadingListProducts
-                        listProducts={listProducts.slice(0, 2)}
-                    />
-                    <PopularProduct
-                        listProducts={listProducts.slice(
-                            2,
-                            listProducts.length
-                        )}
-                    />
+                    <HeadingListProducts listProducts={headingProducts} />
+                    <PopularProduct listProducts={popularProducts} />
                 </>
             )}
             <SaleHomePage />
