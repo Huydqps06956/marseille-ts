@@ -8,18 +8,25 @@ import BoxIcon from './BoxIcon/BoxIcon';
 import Menu from './Menu/Menu';
 import { motion, useAnimation } from 'framer-motion';
 import { useScrollHandling } from '@hooks/useScrollHandling';
+import { useSideBar } from '@contexts/SideBarProvider';
 
 const Header = () => {
+    const leftMenus = useMemo(() => dataMenus.slice(0, 3), []);
+    const rightMenus = useMemo(() => dataMenus.slice(3), []);
+
     const controls = useAnimation();
     const [isFixed, setIsFixed] = useState(false);
     const { scrollPosition } = useScrollHandling();
+    const { setIsOpen } = useSideBar();
 
-    const leftMenus = useMemo(() => dataMenus.slice(0, 3), []);
-    const rightMenus = useMemo(() => dataMenus.slice(3), []);
     useEffect(() => {
         if (scrollPosition >= 80 && !isFixed) {
             controls
-                .start({ y: -100, transition: { duration: 0.03 } })
+                .start({
+                    y: -100,
+                    transition: { duration: 0.03 },
+                    visibility: 'visible'
+                })
                 .then(() => {
                     controls.start({
                         y: 0
@@ -62,7 +69,10 @@ const Header = () => {
                     <img className="w-38" src={Logo} alt="marseille" />
                 </div>
                 <div className="flex flex-1 items-center justify-end gap-4">
-                    <Menu listMenu={rightMenus} />
+                    <Menu
+                        listMenu={rightMenus}
+                        onClick={() => setIsOpen(true)}
+                    />
 
                     <div className="flex items-center justify-center gap-5">
                         <SlReload size={20} />

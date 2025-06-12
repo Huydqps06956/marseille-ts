@@ -1,7 +1,15 @@
 import React from 'react';
-import type { MenuItem } from '@constants/header/menu';
 
-const MenuItemComponent: React.FC<MenuItem> = ({ href, title }) => {
+interface MenuItemProps {
+    title: string;
+    href: string;
+    onClick?: () => void;
+}
+const MenuItemComponent: React.FC<MenuItemProps> = ({
+    href,
+    title,
+    onClick
+}) => {
     return (
         <div
             className=" py-2 inline-block relative cursor-pointer
@@ -11,6 +19,7 @@ const MenuItemComponent: React.FC<MenuItem> = ({ href, title }) => {
      after:transition-transform after:duration-300 after:ease-in-out
      hover:after:scale-x-100"
             key={href}
+            onClick={onClick}
         >
             {title}
         </div>
