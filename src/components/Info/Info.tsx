@@ -1,6 +1,6 @@
-import MainLayout from '@components/MainLayout';
-import { dataInfo, type HomeInfoI } from '@constants/home/info';
 import React from 'react';
+import MainLayout from '@components/MainLayout.tsx';
+import { dataInfo, type HomeInfoI } from '@constants/home/info';
 import InfoCard from './InfoCard/InfoCard';
 
 const Info: React.FC = () => {

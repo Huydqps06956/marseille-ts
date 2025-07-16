@@ -2,7 +2,7 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-roboto-mono: 'Roboto Mono', sans-serif;
+    --font-roboto-mono: 'Roboto Mono', monospace;
 
     --color-primary: oklch(0.32 0 0);
     --color-secondary: oklch(0.63 0 0);
@@ -14,7 +14,7 @@
 
 @layer base {
     html {
-        font-family: 'Roboto Mono', sans-serif;
+        font-family: 'Roboto Mono', monospace;
         font-weight: 350;
         color: var(--color-primary);
     }

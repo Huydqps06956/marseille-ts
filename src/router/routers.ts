@@ -1,6 +1,10 @@
 import { lazy } from 'react';
 
-export const routers = [
-    { path: '/', component: lazy(() => import('@pages/Home/Home')) },
-    { path: '/blog', component: lazy(() => import('@pages/Blog/Blog')) }
+const Home = lazy(() => import('../pages/Home/Home'));
+const Blog = lazy(() => import('../pages/Blog/Blog'));
+
+const routers = [
+    { path: '/', component: Home },
+    { path: '/blog', component: Blog }
 ];
+export default routers;

@@ -1,15 +1,19 @@
+import { useSideBar } from '@contexts/SideBarProvider';
 import React from 'react';
 
 interface MenuItemProps {
     title: string;
     href: string;
-    onClick?: () => void;
 }
-const MenuItemComponent: React.FC<MenuItemProps> = ({
-    href,
-    title,
-    onClick
-}) => {
+const MenuItemComponent: React.FC<MenuItemProps> = ({ href, title }) => {
+    const { setIsOpen, setType } = useSideBar();
+
+    const handleClick = () => {
+        if (title === 'Sign In') {
+            setType('login');
+            setIsOpen(true);
+        }
+    };
     return (
         <div
             className=" py-2 inline-block relative cursor-pointer
@@ -19,7 +23,7 @@ const MenuItemComponent: React.FC<MenuItemProps> = ({
      after:transition-transform after:duration-300 after:ease-in-out
      hover:after:scale-x-100"
             key={href}
-            onClick={onClick}
+            onClick={handleClick}
         >
             {title}
         </div>

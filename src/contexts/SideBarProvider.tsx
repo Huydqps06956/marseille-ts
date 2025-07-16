@@ -3,7 +3,7 @@ interface ISideBarContext {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
     type: string;
-    setType: (type: string) => void;
+    setType: (type: TSideBar) => void;
 }
 interface SideBarProviderProps {
     children: ReactNode;
@@ -17,7 +17,7 @@ export const SideBarProvider: React.FC<SideBarProviderProps> = ({
     children
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [type, setType] = useState<string>('');
+    const [type, setType] = useState<TSideBar>('login');
 
     const value: ISideBarContext = {
         isOpen,

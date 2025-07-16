@@ -1,14 +1,12 @@
-import React from 'react';
 import type { MenuItem } from '@constants/header/menu';
+import React from 'react';
 import MenuItemComponent from './MenuItemComponent';
-import { useSideBar } from '@contexts/SideBarProvider';
 
 interface IMenuProps {
     listMenu: MenuItem[];
-    onClick?: () => void;
 }
 
-const Menu: React.FC<IMenuProps> = ({ listMenu, onClick }) => {
+const Menu: React.FC<IMenuProps> = ({ listMenu }) => {
     return (
         <div className="flex items-center justify-center gap-4">
             {listMenu.map((item, index) => {
@@ -17,7 +15,6 @@ const Menu: React.FC<IMenuProps> = ({ listMenu, onClick }) => {
                         key={index}
                         title={item.title}
                         href={item.href}
-                        onClick={onClick}
                     />
                 );
             })}

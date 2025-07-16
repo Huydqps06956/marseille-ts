@@ -1,6 +1,6 @@
 import React from 'react';
 import BannerImage from '@assets/images/banner.png';
-import Button from '@components/Button';
+import Button from '@components/Button.tsx';
 const Banner: React.FC = () => {
     return (
         <section
@@ -8,7 +8,7 @@ const Banner: React.FC = () => {
             style={{ backgroundImage: `url(${BannerImage})` }}
         >
             <div className="space-y-4">
-                <h1 className="text-[42px] text-title font-normal">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl text-title font-normal">
                     XStore Marseille04 Demo
                 </h1>
                 <p className="text-base/6 font-normal text-third">

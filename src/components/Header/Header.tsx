@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
-import { dataMenus } from '@constants/header/menu';
-import { BsCart3 } from 'react-icons/bs';
-import { SlHeart, SlReload } from 'react-icons/sl';
 import Logo from '@assets/images/logo.png';
 import { boxIcons } from '@constants/header/boxicon';
+import { dataMenus } from '@constants/header/menu';
+import { useSideBar } from '@contexts/SideBarProvider';
+import { useScrollHandling } from '@hooks/useScrollHandling';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+import { BsCart3 } from 'react-icons/bs';
+import { SlHeart, SlReload } from 'react-icons/sl';
 import BoxIcon from './BoxIcon/BoxIcon';
 import Menu from './Menu/Menu';
-import { motion, useAnimation } from 'framer-motion';
-import { useScrollHandling } from '@hooks/useScrollHandling';
-import { useSideBar } from '@contexts/SideBarProvider';
 
 const Header = () => {
     const leftMenus = useMemo(() => dataMenus.slice(0, 3), []);
@@ -17,7 +17,11 @@ const Header = () => {
     const controls = useAnimation();
     const [isFixed, setIsFixed] = useState(false);
     const { scrollPosition } = useScrollHandling();
-    const { setIsOpen } = useSideBar();
+    const { setIsOpen, setType, type } = useSideBar();
+    const handleOpenSideBar = (newType: TSideBar) => {
+        type !== newType && setType(newType);
+        setIsOpen(true);
+    };
 
     useEffect(() => {
         if (scrollPosition >= 80 && !isFixed) {
@@ -69,15 +73,24 @@ const Header = () => {
                     <img className="w-38" src={Logo} alt="marseille" />
                 </div>
                 <div className="flex flex-1 items-center justify-end gap-4">
-                    <Menu
-                        listMenu={rightMenus}
-                        onClick={() => setIsOpen(true)}
-                    />
+                    <Menu listMenu={rightMenus} />
 
                     <div className="flex items-center justify-center gap-5">
-                        <SlReload size={20} />
-                        <SlHeart size={20} />
-                        <BsCart3 size={20} />
+                        <SlReload
+                            size={20}
+                            className="cursor-pointer"
+                            onClick={() => handleOpenSideBar('compare')}
+                        />
+                        <SlHeart
+                            size={20}
+                            className="cursor-pointer"
+                            onClick={() => handleOpenSideBar('wishlist')}
+                        />
+                        <BsCart3
+                            size={20}
+                            className="cursor-pointer"
+                            onClick={() => handleOpenSideBar('cart')}
+                        />
                     </div>
                 </div>
             </div>

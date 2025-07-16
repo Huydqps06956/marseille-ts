@@ -1,4 +1,5 @@
-import AdvanceHeading from '@components/AdvanceHeadline/AdvanceHeadline';
+import React, { useMemo } from 'react';
+import AdvanceHeadline from '@components/AdvanceHeadline/AdvanceHeadline';
 import Banner from '@components/Banner/Banner';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
@@ -7,7 +8,6 @@ import Info from '@components/Info/Info';
 import PopularProduct from '@components/PopularProduct/PopularProduct';
 import SaleHomePage from '@components/SaleHomePage/SaleHomePage';
 import { useProducts } from '@hooks/useProducts';
-import React, { useMemo } from 'react';
 const Home: React.FC = () => {
     const { products, loading, error } = useProducts({
         current: 1,
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
             <Header />
             <Banner />
             <Info />
-            <AdvanceHeading
+            <AdvanceHeadline
                 title="Our best products"
                 subTitle="don't miss super offers"
             />

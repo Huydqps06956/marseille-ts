@@ -1,6 +1,6 @@
+import React from 'react';
 import Button from '@components/Button';
 import Input from '@components/Input';
-import React from 'react';
 
 const Login: React.FC = () => {
     return (
@@ -10,10 +10,10 @@ const Login: React.FC = () => {
             <form>
                 <Input type="text" label="Username or email" isRequired />
                 <Input type="password" label="Password" isRequired />
-                <div className="flex items-center gap-4">
+                <label className="flex items-center gap-4 cursor-pointer">
                     <input type="checkbox" />
                     <span>Remember me</span>
-                </div>
+                </label>
 
                 <Button
                     fullWidth={true}

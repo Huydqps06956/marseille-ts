@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Blog = () => {
+const Blog: React.FC = () => {
     console.log('blog');
     const [name, setName] = useState('huy');
     useEffect(() => {

@@ -1,41 +1,89 @@
-import Login from '@components/ContentSideBar/Login/Login';
+import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useSideBar } from '@contexts/SideBarProvider';
-import React from 'react';
 import { TfiClose } from 'react-icons/tfi';
+import Login from '@components/ContentSideBar/Login/Login';
+import Compare from '@components/ContentSideBar/Login/Compare/Compare';
+
+const sidebarVariants = {
+    open: {
+        x: 0,
+        transition: { duration: 0.3, ease: 'easeInOut' }
+    },
+    closed: {
+        x: '100%',
+        transition: { duration: 0.3, ease: 'easeInOut' }
+    }
+};
+
+const overlayVariants = {
+    open: {
+        opacity: 1,
+        transition: { duration: 0.3 }
+    },
+    closed: {
+        opacity: 0,
+        transition: { duration: 0.3 }
+    }
+};
 
 const SideBar: React.FC = () => {
-    const { isOpen, setIsOpen } = useSideBar();
+    const { isOpen, setIsOpen, type } = useSideBar();
 
     const handleToggle = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(false);
     };
+
+    const handleRenderContent = () => {
+        switch (type) {
+            case 'login':
+                return <Login />;
+            case 'compare':
+                return <Compare />;
+            case 'cart':
+                return <div>Cart Content</div>;
+            case 'wishlist':
+                return <div>Wishlist Content</div>;
+            default:
+                return null;
+        }
+    };
+
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    }, [isOpen]);
+
     return (
-        <aside className="relative ">
-            <div
-                className={
-                    isOpen
-                        ? 'fixed top-0 left-0 right-0 bottom-0 bg-[#0000004d] z-1000 transition-all druation-300 ease-initial'
-                        : ''
-                }
-                onClick={handleToggle}
-            ></div>
-            <div
-                className="fixed top-0 right-0 w-92 h-screen py-5 px-[30px] z-1001 transition-all duration-300 text-third text-sm shadow-md flex flex-col bg-white "
-                style={{
-                    transform: isOpen
-                        ? 'translate3d(0, 0, 0)'
-                        : 'translate3d(100%, 0, 0)'
-                }}
-            >
-                {isOpen && (
-                    <TfiClose
-                        className="absolute top-[30px] -left-[50px] w-8 h-8 bg-white p-2 rounded-full text-title z-[1001] cursor-pointer hover:bg-[#e1e1e1]"
+        <AnimatePresence>
+            {isOpen && (
+                <aside className="relative z-[1000]">
+                    {/* Overlay */}
+                    <motion.div
+                        className="fixed inset-0 bg-[#0000004d]bg-opacity-30"
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        variants={overlayVariants}
                         onClick={handleToggle}
                     />
-                )}
-                <Login />
-            </div>
-        </aside>
+
+                    {/* Sidebar */}
+                    <motion.div
+                        className="fixed top-0 right-0 w-92 h-screen py-5 px-[30px] bg-white shadow-md text-third text-sm flex flex-col z-[1001]"
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        variants={sidebarVariants}
+                    >
+                        <TfiClose
+                            className="absolute top-[30px] -left-[50px] w-8 h-8 bg-white p-2 rounded-full text-title z-[1002] cursor-pointer hover:bg-[#e1e1e1]"
+                            onClick={handleToggle}
+                        />
+                        {handleRenderContent()}
+                    </motion.div>
+                </aside>
+            )}
+        </AnimatePresence>
     );
 };
 

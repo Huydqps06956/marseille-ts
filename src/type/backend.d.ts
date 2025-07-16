@@ -30,4 +30,6 @@ declare global {
         };
         accessToken: string;
     }
+
+    type TSideBar = 'login' | 'compare' | 'cart' | 'wishlist';
 }
