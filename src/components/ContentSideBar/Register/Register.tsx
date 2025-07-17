@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
 import Button from '@components/Button';
 import Input from '@components/Input';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema, type LoginFormType } from '../../../schemas/loginSchema';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import {
+    registerSchema,
+    type registerFormType
+} from '../../../schemas/registerSchema';
 import { useSideBar } from '@contexts/SideBarProvider';
 
 const Login: React.FC = () => {
     const { setType, setIsOpen } = useSideBar();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset
-    } = useForm<LoginFormType>({ resolver: zodResolver(loginSchema) });
+    } = useForm<registerFormType>({ resolver: zodResolver(registerSchema) });
 
-    const onSubmit = (data: LoginFormType) => {
+    const onSubmit = (data: registerFormType) => {
         console.log('✅ Form hợp lệ:', data);
         // Gửi API login tại đây
         reset();
     };
-
     return (
         <div>
-            <h2 className="text-lg text-center mb-4">SIGN IN</h2>
+            <h2 className="text-lg text-center mb-4">SIGN UP</h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
@@ -40,33 +43,33 @@ const Login: React.FC = () => {
                     {...register('password')}
                     error={errors.password?.message}
                 />
-                <label className="flex items-center gap-4 cursor-pointer">
-                    <input type="checkbox" />
-                    <span>Remember me</span>
-                </label>
+
+                <Input
+                    label="Confirm Password"
+                    type="password"
+                    isRequired
+                    {...register('confirmPassword')}
+                    error={errors.confirmPassword?.message}
+                />
 
                 <Button
                     type="submit"
                     fullWidth={true}
                     className="mt-5 text-xs/5 px-[30px] py-[10px] rounded-sm border border-primary hover:bg-[#FFFFFF00] hover:text-primary duration-300"
                 >
-                    LOGIN
+                    REGISTER
                 </Button>
-
                 <Button
                     fullWidth={true}
                     variant="outline"
                     className="mt-5 text-xs/5 px-[30px] py-[10px] rounded-sm "
                     onClick={() => {
-                        setType('register');
+                        setType('login');
                         setIsOpen(true);
                     }}
                 >
-                    DON'T HAVE AN ACCOUNT?
+                    ALREADY HAVE AN ACCOUNT?
                 </Button>
-                <p className="text-center mt-5 font-roboto-mono">
-                    Lost your password?
-                </p>
             </form>
         </div>
     );

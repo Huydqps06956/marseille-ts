@@ -6,6 +6,7 @@ import Login from '@components/ContentSideBar/Login/Login';
 import Compare from '@components/ContentSideBar/Compare/Compare';
 import WishList from '@components/ContentSideBar/WishList/WishList';
 import Cart from '@components/ContentSideBar/Cart/Cart';
+import Register from '@components/ContentSideBar/Register/Register';
 
 const sidebarVariants = {
     open: {
@@ -46,6 +47,9 @@ const SideBar: React.FC = () => {
                 return <Cart />;
             case 'wishlist':
                 return <WishList />;
+            case 'register':
+                return <Register />;
+
             default:
                 return null;
         }
