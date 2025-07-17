@@ -5,9 +5,12 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, type LoginFormType } from '../../../schemas/loginSchema';
 import { useSideBar } from '@contexts/SideBarProvider';
+import { useToast } from '@hooks/useToastify';
 
 const Login: React.FC = () => {
     const { setType, setIsOpen } = useSideBar();
+    const toast = useToast();
+
     const {
         register,
         handleSubmit,
@@ -19,6 +22,7 @@ const Login: React.FC = () => {
         console.log('✅ Form hợp lệ:', data);
         // Gửi API login tại đây
         reset();
+        toast.success('Login successful!');
     };
 
     return (

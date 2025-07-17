@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { SideBarProvider } from '@contexts/SideBarProvider';
 import SideBar from '@components/SideBar/SideBar';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ const App = () => {
                     </Suspense>
                 </SideBarProvider>
             </BrowserRouter>
+            <ToastContainer />
         </>
     );
 };
