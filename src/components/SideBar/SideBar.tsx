@@ -3,7 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSideBar } from '@contexts/SideBarProvider';
 import { TfiClose } from 'react-icons/tfi';
 import Login from '@components/ContentSideBar/Login/Login';
-import Compare from '@components/ContentSideBar/Login/Compare/Compare';
+import Compare from '@components/ContentSideBar/Compare/Compare';
+import WishList from '@components/ContentSideBar/WishList/WishList';
+import Cart from '@components/ContentSideBar/Cart/Cart';
 
 const sidebarVariants = {
     open: {
@@ -41,9 +43,9 @@ const SideBar: React.FC = () => {
             case 'compare':
                 return <Compare />;
             case 'cart':
-                return <div>Cart Content</div>;
+                return <Cart />;
             case 'wishlist':
-                return <div>Wishlist Content</div>;
+                return <WishList />;
             default:
                 return null;
         }

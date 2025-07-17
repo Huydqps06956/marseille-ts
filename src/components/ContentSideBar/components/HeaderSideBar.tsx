@@ -6,7 +6,7 @@ const HeaderSideBar: React.FC<IHeaderSideBarProps> = ({ title, icon }) => {
     return (
         <div className="flex items-center justify-center flex-col gap-2">
             {icon}
-            <div className="text-lg text-third">{title}</div>
+            <div className="text-lg text-third hover-underline">{title}</div>
         </div>
     );
 };

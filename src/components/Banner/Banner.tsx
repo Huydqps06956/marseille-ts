@@ -18,7 +18,7 @@ const Banner: React.FC = () => {
                 <div className="pt-4">
                     <Button
                         size="sm"
-                        className="py-3 px-11 rounded-sm border border-primary hover:bg-[#FFFFFF00] hover:text-primary duration-300"
+                        className="py-3 px-11 rounded-sm hover-button-bg"
                     >
                         Go to shop
                     </Button>

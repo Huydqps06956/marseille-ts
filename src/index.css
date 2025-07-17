@@ -19,3 +19,16 @@
         color: var(--color-primary);
     }
 }
+
+.hover-button-bg {
+    @apply border border-primary hover:bg-[#FFFFFF00] hover:text-primary duration-300;
+}
+
+.hover-underline {
+    @apply inline-block relative cursor-pointer
+     after:content-[''] after:absolute after:w-full after:h-0.5 
+     after:bottom-0 after:left-0 after:bg-primary
+     after:scale-x-0 after:origin-right
+     after:transition-transform after:duration-300 after:ease-in-out
+     hover:after:scale-x-100;
+}
