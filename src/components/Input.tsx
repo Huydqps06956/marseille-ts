@@ -6,10 +6,21 @@ interface InputProps {
     label: string;
     isRequired: boolean;
     error?: string;
+    autoComplete?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ type = 'text', label, isRequired = false, error, ...rest }, ref) => {
+    (
+        {
+            type = 'text',
+            label,
+            isRequired = false,
+            error,
+            autoComplete,
+            ...rest
+        },
+        ref
+    ) => {
         const isPassword = type === 'password';
         const [showPassword, setShowPassword] = useState(false);
 
@@ -21,6 +32,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 <div className="relative mb-5  ">
                     <input
                         type={isPassword && showPassword ? 'text' : type}
+                        autoComplete={autoComplete}
                         className="text-base/8 px-[1.07em] border border-[#e1e1e1] w-full outline-none "
                         ref={ref}
                         {...rest}

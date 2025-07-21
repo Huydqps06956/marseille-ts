@@ -54,12 +54,14 @@ const Login: React.FC = () => {
                     isRequired
                     {...register('username')}
                     error={errors.username?.message}
+                    autoComplete="username"
                 />
                 <Input
                     type="password"
                     label="Password"
                     isRequired
                     {...register('password')}
+                    autoComplete="current-password"
                     error={errors.password?.message}
                 />
                 <label className="flex items-center gap-4 cursor-pointer">

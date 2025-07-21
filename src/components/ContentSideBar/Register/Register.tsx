@@ -35,6 +35,7 @@ const Login: React.FC = () => {
                     isRequired
                     {...register('username')}
                     error={errors.username?.message}
+                    autoComplete="username"
                 />
                 <Input
                     type="password"
@@ -42,6 +43,7 @@ const Login: React.FC = () => {
                     isRequired
                     {...register('password')}
                     error={errors.password?.message}
+                    autoComplete="new-password"
                 />
 
                 <Input
@@ -50,6 +52,7 @@ const Login: React.FC = () => {
                     isRequired
                     {...register('confirmPassword')}
                     error={errors.confirmPassword?.message}
+                    autoComplete="new-password"
                 />
 
                 <Button
