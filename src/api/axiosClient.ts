@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
+import Cookies from 'js-cookie';
 
 const axiosClient: AxiosInstance = axios.create({
     baseURL:
@@ -11,7 +12,7 @@ const axiosClient: AxiosInstance = axios.create({
 
 axiosClient.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('token');
+        const token = Cookies.get('access_token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -26,13 +27,26 @@ axiosClient.interceptors.response.use(
     response => {
         return response.data;
     },
-    error => {
-        if (error.response?.status === 401) {
-            //Xử lý token hết hạn
-            localStorage.removeItem('token');
-            //window.location.href('/login')
+    async error => {
+        const originalRequest = error.config;
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            const refreshToken = Cookies.get('refresh_token');
+            originalRequest._retry = true;
+            if (!refreshToken) return Promise.reject(error);
+            try {
+                const res = await axiosClient.post('/auth/refresh-token', {
+                    refreshToken
+                });
+                const newAccessToken = res.data.access_token;
+                Cookies.set('access_token', newAccessToken);
+                originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+                return axiosClient(originalRequest);
+            } catch (error) {
+                Cookies.remove('access_token');
+                Cookies.remove('refresh_token');
+                return Promise.reject(error);
+            }
         }
-        return Promise.reject(error);
     }
 );
 

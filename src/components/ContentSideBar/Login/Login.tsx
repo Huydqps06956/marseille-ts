@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import { authApi } from '@api/authService';
 import Button from '@components/Button';
 import Input from '@components/Input';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema, type LoginFormType } from '../../../schemas/loginSchema';
 import { useSideBar } from '@contexts/SideBarProvider';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@hooks/useToastify';
-
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { loginSchema, type LoginFormType } from '../../../schemas/loginSchema';
+import Cookies from 'js-cookie';
 const Login: React.FC = () => {
     const { setType, setIsOpen } = useSideBar();
     const toast = useToast();
@@ -18,13 +19,30 @@ const Login: React.FC = () => {
         reset
     } = useForm<LoginFormType>({ resolver: zodResolver(loginSchema) });
 
-    const onSubmit = (data: LoginFormType) => {
-        console.log('✅ Form hợp lệ:', data);
-        // Gửi API login tại đây
-        reset();
-        toast.success('Login successful!');
+    const onSubmit = async (data: LoginFormType) => {
+        try {
+            const res = await authApi.login(data);
+            const { access_token, refresh_token } = res.data;
+            Cookies.set('access_token', access_token);
+            Cookies.set('refresh_token', refresh_token);
+
+            toast.success('Login successful!');
+            reset();
+            setIsOpen(false);
+        } catch (error: any) {
+            return toast.error(
+                error.response?.data?.message || 'An error occurred.'
+            );
+        }
     };
 
+    useEffect(() => {
+        const getProfile = async () => {
+            const res = await authApi.getProfile();
+            console.log(res.data);
+        };
+        getProfile();
+    }, []);
     return (
         <div>
             <h2 className="text-lg text-center mb-4">SIGN IN</h2>
