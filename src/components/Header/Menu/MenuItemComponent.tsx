@@ -1,5 +1,7 @@
 import { useSideBar } from '@contexts/SideBarProvider';
-import React from 'react';
+import { useStore } from '@contexts/StoreProvider';
+import Cookies from 'js-cookie';
+import React, { useState } from 'react';
 
 interface MenuItemProps {
     title: string;
@@ -7,13 +9,22 @@ interface MenuItemProps {
 }
 const MenuItemComponent: React.FC<MenuItemProps> = ({ href, title }) => {
     const { setIsOpen, setType } = useSideBar();
-
+    const { userInfo, isLoggedIn, handleLogout } = useStore();
+    const [isShowSubMenu, setIsShowSubMenu] = useState(false);
     const handleClick = () => {
-        if (title === 'Sign In') {
+        if (title === 'Sign In' && !isLoggedIn) {
             setType('login');
             setIsOpen(true);
         }
     };
+
+    const handleHover = () => {
+        if (title === 'Sign In' && isLoggedIn) {
+            console.log(true);
+            setIsShowSubMenu(true);
+        }
+    };
+
     return (
         <div
             className=" py-2 inline-block relative cursor-pointer
@@ -24,8 +35,23 @@ const MenuItemComponent: React.FC<MenuItemProps> = ({ href, title }) => {
      hover:after:scale-x-100"
             key={href}
             onClick={handleClick}
+            onMouseEnter={handleHover}
+            onMouseLeave={() => setIsShowSubMenu(false)}
         >
-            {title}
+            {title === 'Sign In' && !userInfo
+                ? 'Sign In'
+                : title === 'Sign In' && userInfo
+                ? `Hello ${userInfo.name ? userInfo.name : userInfo.email}`
+                : title}
+
+            {isShowSubMenu && (
+                <div
+                    className="absolute bg-white w-full min-w-45 mt-2 p-1 cursor-pointer"
+                    onClick={handleLogout}
+                >
+                    LOG OUT
+                </div>
+            )}
         </div>
     );
 };

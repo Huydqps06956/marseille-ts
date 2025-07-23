@@ -1,15 +1,18 @@
+import React from 'react';
 import { authApi } from '@api/authService';
-import Button from '@components/Button';
-import Input from '@components/Input';
 import { useSideBar } from '@contexts/SideBarProvider';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@hooks/useToastify';
-import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { loginSchema, type LoginFormType } from '../../../schemas/loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Button from '@components/Button';
+import Input from '@components/Input';
 import Cookies from 'js-cookie';
+import { useStore } from '@contexts/StoreProvider';
+
 const Login: React.FC = () => {
     const { setType, setIsOpen } = useSideBar();
+    const { setUserInfo } = useStore();
     const toast = useToast();
 
     const {
@@ -22,13 +25,14 @@ const Login: React.FC = () => {
     const onSubmit = async (data: LoginFormType) => {
         try {
             const res = await authApi.login(data);
-            const { access_token, refresh_token } = res.data;
+            const { access_token, refresh_token, user } = res.data;
             Cookies.set('access_token', access_token);
             Cookies.set('refresh_token', refresh_token);
-
-            toast.success('Login successful!');
+            Cookies.set('user_id', user._id);
+            setUserInfo(user);
             reset();
             setIsOpen(false);
+            toast.success('Login successful!');
         } catch (error: any) {
             return toast.error(
                 error.response?.data?.message || 'An error occurred.'
@@ -36,13 +40,6 @@ const Login: React.FC = () => {
         }
     };
 
-    useEffect(() => {
-        const getProfile = async () => {
-            const res = await authApi.getProfile();
-            console.log(res.data);
-        };
-        getProfile();
-    }, []);
     return (
         <div>
             <h2 className="text-lg text-center mb-4">SIGN IN</h2>

@@ -1,6 +1,12 @@
 export {};
 
 declare global {
+    interface User {
+        _id: string;
+        name: string;
+        email: string;
+        iamge?: string;
+    }
     interface ProductSize {
         name: string;
         amount: string;

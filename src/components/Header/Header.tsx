@@ -69,7 +69,7 @@ const Header = () => {
 
                     <Menu listMenu={leftMenus} />
                 </div>
-                <div className="flex-1 flex justify-center items-center">
+                <div className=" flex justify-center items-center">
                     <img className="w-38" src={Logo} alt="marseille" />
                 </div>
                 <div className="flex flex-1 items-center justify-end gap-4">
