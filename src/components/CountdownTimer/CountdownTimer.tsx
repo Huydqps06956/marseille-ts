@@ -2,6 +2,7 @@ import React, { useState, useEffect, type ReactElement } from 'react';
 
 interface CountdownTimerProps {
     targetDate: string;
+    className?: string;
 }
 
 interface TimeLeft {
@@ -12,7 +13,10 @@ interface TimeLeft {
     [key: string]: number | undefined;
 }
 
-const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
+const CountdownTimer: React.FC<CountdownTimerProps> = ({
+    targetDate,
+    className
+}) => {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
 
     function calculateTimeLeft(): TimeLeft {
@@ -59,7 +63,11 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
         }
     });
 
-    return <div className="flex gap-4 mt-28">{timerComponents}</div>;
+    return (
+        <div className={`${className ? className : 'flex gap-4 mt-28'}`}>
+            {timerComponents}
+        </div>
+    );
 };
 
 export default CountdownTimer;
