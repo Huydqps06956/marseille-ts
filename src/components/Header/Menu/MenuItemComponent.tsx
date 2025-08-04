@@ -1,6 +1,5 @@
 import { useSideBar } from '@contexts/SideBarProvider';
 import { useStore } from '@contexts/StoreProvider';
-import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

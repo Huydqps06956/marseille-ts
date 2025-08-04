@@ -42,6 +42,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <button
+            disabled={disabled}
             type={type}
             className={` ${widthStyle} ${varaintStyles[variant]} ${sizeStyles[size]} ${disabledStyle} ${roundedStyle} transition-all duration-200 
         ${className}`}

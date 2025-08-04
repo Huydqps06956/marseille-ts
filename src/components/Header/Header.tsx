@@ -17,7 +17,7 @@ const Header = () => {
     const controls = useAnimation();
     const [isFixed, setIsFixed] = useState(false);
     const { scrollPosition } = useScrollHandling();
-    const { setIsOpen, setType, type } = useSideBar();
+    const { setIsOpen, setType, type, cart } = useSideBar();
     const handleOpenSideBar = (newType: TSideBar) => {
         type !== newType && setType(newType);
         setIsOpen(true);
@@ -86,11 +86,18 @@ const Header = () => {
                             className="cursor-pointer"
                             onClick={() => handleOpenSideBar('wishlist')}
                         />
-                        <BsCart3
-                            size={20}
-                            className="cursor-pointer"
-                            onClick={() => handleOpenSideBar('cart')}
-                        />
+                        <div className="relative">
+                            <BsCart3
+                                size={20}
+                                className="cursor-pointer"
+                                onClick={() => handleOpenSideBar('cart')}
+                            />
+                            {cart.items.length > 0 && (
+                                <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] leading-none px-1.5 py-0.5 rounded-full">
+                                    {cart.items.length}
+                                </span>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

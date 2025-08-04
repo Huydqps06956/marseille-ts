@@ -12,7 +12,7 @@ const HeadingListProducts: React.FC<IListProducts> = ({ listProducts }) => {
             <div className="grid grid-cols-2 justify-between gap-[15px]">
                 <CountdownBanner />
                 <div className=" grid grid-cols-2 gap-5">
-                    {listProducts.map((product: any) => (
+                    {listProducts.map((product: Product) => (
                         <ProductItem key={product._id} {...product} />
                     ))}
                 </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import MainLayout from '@components/MainLayout.tsx';
 import { dataInfo, type HomeInfoI } from '@constants/home/info';
-import InfoCard from './InfoCard/InfoCard';
+import InfoCard from './InfoCart/InfoCart';
 
 const Info: React.FC = () => {
     return (

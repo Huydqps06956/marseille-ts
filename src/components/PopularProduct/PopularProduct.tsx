@@ -7,7 +7,7 @@ const PopularProduct: React.FC<IListProducts> = ({ listProducts }) => {
     return (
         <MainLayout>
             <div className="grid grid-cols-4 gap-4 mt-4">
-                {listProducts.map((product: any) => (
+                {listProducts.map((product: Product) => (
                     <ProductItem key={product._id} {...product} />
                 ))}
             </div>

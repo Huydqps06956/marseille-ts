@@ -1,14 +1,14 @@
-import React from 'react';
 import { authApi } from '@api/authService';
-import { useSideBar } from '@contexts/SideBarProvider';
-import { useToast } from '@hooks/useToastify';
-import { useForm } from 'react-hook-form';
-import { loginSchema, type LoginFormType } from '../../../schemas/loginSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '@components/Button';
 import Input from '@components/Input';
-import Cookies from 'js-cookie';
+import { useSideBar } from '@contexts/SideBarProvider';
 import { useStore } from '@contexts/StoreProvider';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useToast } from '@hooks/useToastify';
+import Cookies from 'js-cookie';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { loginSchema, type LoginFormType } from '../../../schemas/loginSchema';
 
 const Login: React.FC = () => {
     const { setType, setIsOpen } = useSideBar();

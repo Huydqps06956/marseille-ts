@@ -2,10 +2,16 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSideBar } from '@contexts/SideBarProvider';
+import { useCurrency } from '@hooks/useCurrency';
+interface Props {
+    product: ProductInCart;
+}
 
-const ProductItem = () => {
+const ProductItem: React.FC<Props> = ({ product }) => {
     const [isHover, setIsHover] = useState(false);
     const { type } = useSideBar();
+    const formatCurrency = useCurrency();
+
     return (
         <motion.div
             onMouseEnter={() => setIsHover(true)}
@@ -14,8 +20,8 @@ const ProductItem = () => {
         >
             <img
                 className="w-[70px] object-cover"
-                src="https://xstore.b-cdn.net/elementor2/marseille04/wp-content/uploads/sites/2/2022/12/Image-17.1-min.jpg"
-                alt=""
+                src={product.primaryImage}
+                alt={product.productName}
             />
             <motion.div
                 initial={{ x: 40, opacity: 0 }}
@@ -27,17 +33,20 @@ const ProductItem = () => {
             </motion.div>
             <div className="flex items-start justify-center mb-2 flex-col overflow-hidden">
                 <h4 className="text-[15px]/[1.4] pr-6 w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                    title product title product
+                    {product.productName}
                 </h4>
 
                 {type === 'cart' && (
                     <>
-                        <p className="text-[#9e9e9e] mt-1 mb-2">Size: M</p>
-                        <p>SKU: 12349</p>
+                        <p className="text-[#9e9e9e] mt-1 mb-2">
+                            Size: {product.size}
+                        </p>
+                        <p>
+                            quantity: {product.quantity} x {''}
+                            {formatCurrency(product.price)}
+                        </p>
                     </>
                 )}
-
-                <p>$119.99</p>
             </div>
         </motion.div>
     );

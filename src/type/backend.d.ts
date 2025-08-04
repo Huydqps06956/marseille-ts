@@ -28,6 +28,19 @@ declare global {
         __v?: number;
     }
 
+    interface ProductInCart {
+        _id: string;
+        size: string;
+        quantity: number;
+        price: number;
+        productName: string;
+        primaryImage: string;
+    }
+    interface Cart {
+        items: ProductInCart[];
+        total: number;
+    }
+
     interface ILogin {
         user: {
             _id: string;

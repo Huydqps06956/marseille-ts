@@ -11,7 +11,6 @@ import {
 interface StoreContextType {
     userInfo: User | null;
     setUserInfo: (user: User | null) => void;
-    isLoggedIn: boolean;
     handleLogout: () => void;
 }
 interface StoreProviderProps {
@@ -48,7 +47,6 @@ export const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
 
     const value: StoreContextType = {
         userInfo: userInfo || null,
-        isLoggedIn: userInfo !== null,
         setUserInfo: (user: User | null) => {
             setUserInfo(user);
         },
