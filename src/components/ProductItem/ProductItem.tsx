@@ -1,4 +1,4 @@
-import { cartApi } from '@api/cartService';
+import type { CartRequest } from '@api/cartService';
 import Button from '@components/Button';
 import Spinner from '@components/Spiner';
 import { useSideBar } from '@contexts/SideBarProvider';
@@ -14,6 +14,8 @@ import { IoEyeOutline } from 'react-icons/io5';
 interface ProductItemI extends Product {
     isHomePage?: boolean;
     isShowGrid?: boolean;
+    loading: boolean;
+    addToCart: (data: CartRequest) => Promise<Cart>;
 }
 
 const ProductItem: React.FC<ProductItemI> = ({
@@ -23,16 +25,16 @@ const ProductItem: React.FC<ProductItemI> = ({
     size,
     _id,
     isHomePage = true,
-    isShowGrid = true
+    isShowGrid = true,
+    loading,
+    addToCart
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [sizeChoose, setSizeChoose] = useState(size?.[0]?.name || '');
     const [isFirst, setIsFirst] = useState(true);
-    const { type, setType, setIsOpen, handleGetCart } = useSideBar();
+    const { type, setType, setIsOpen } = useSideBar();
     const toast = useToast();
-    const [isLoading, setIsLoading] = useState(false);
     const formatCurrency = useCurrency();
-
     const userId = Cookies.get('user_id');
     const handleSizeClick = (name: string) => {
         setSizeChoose(name);
@@ -40,8 +42,36 @@ const ProductItem: React.FC<ProductItemI> = ({
     };
     const handleClearSize = () => setSizeChoose('');
 
+    // const handleAddToCart = async () => {
+    //     setIsLoading(true);
+    //     if (!userId) {
+    //         setIsOpen(true);
+    //         type !== 'login' && setType('login');
+    //         return toast.warning('Please login to add product to cart!');
+    //     }
+    //     if (!sizeChoose) {
+    //         return toast.warning('Please choose size!');
+    //     }
+
+    //     const data = {
+    //         productId: _id,
+    //         quantity: 1,
+    //         size: sizeChoose
+    //     };
+    //     try {
+    //         await cartApi.addProductToCart(data);
+    //         setType('cart');
+    //         handleGetCart(userId, 'cart');
+    //         setIsOpen(true);
+    //         toast.success('add product to cart sucsessfully!');
+    //         setIsLoading(false);
+    //     } catch (error: any) {
+    //         toast.error(error);
+    //         setIsLoading(false);
+    //     }
+    // };
+
     const handleAddToCart = async () => {
-        setIsLoading(true);
         if (!userId) {
             setIsOpen(true);
             type !== 'login' && setType('login');
@@ -56,17 +86,11 @@ const ProductItem: React.FC<ProductItemI> = ({
             quantity: 1,
             size: sizeChoose
         };
-        try {
-            await cartApi.addProductToCart(data);
-            setType('cart');
-            handleGetCart(userId, 'cart');
-            setIsOpen(true);
-            toast.success('add product to cart sucsessfully!');
-        } catch (error: any) {
-            toast.error(error);
-        } finally {
-            setIsLoading(false);
-        }
+
+        addToCart(data);
+        toast.success('add product to cart sucsessfully!');
+        setType('cart');
+        setIsOpen(true);
     };
 
     return (
@@ -187,19 +211,19 @@ const ProductItem: React.FC<ProductItemI> = ({
                 <div className="flex-1">
                     {!isHomePage && (
                         <Button
-                            disabled={sizeChoose == '' || isLoading}
+                            disabled={sizeChoose == '' || loading}
                             className="mt-3 text-xs/3 rounded-sm py-[10px] px-[30px] hover-button-bg relative"
                             onClick={handleAddToCart}
                         >
                             <span
                                 className={`${
-                                    isLoading ? 'invisible' : 'visible'
+                                    loading ? 'invisible' : 'visible'
                                 }`}
                             >
                                 {sizeChoose ? 'ADD TO CART' : 'SELECT OPTIONS'}
                             </span>
                             <span className="absolute inset-0 flex items-center justify-center">
-                                {isLoading && <Spinner />}
+                                {loading && <Spinner />}
                             </span>
                         </Button>
                     )}

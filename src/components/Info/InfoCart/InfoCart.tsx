@@ -1,7 +1,7 @@
 import type { HomeInfoI } from '@constants/home/info';
 import React from 'react';
 
-const InfoCard: React.FC<HomeInfoI> = ({ icon, description, title }) => {
+const InfoCart: React.FC<HomeInfoI> = ({ icon, description, title }) => {
     return (
         <div className="flex flex-1 justify-between items-center gap-5 p-[15px]">
             <div className="text-5xl text-five">{icon}</div>
@@ -13,4 +13,4 @@ const InfoCard: React.FC<HomeInfoI> = ({ icon, description, title }) => {
     );
 };
 
-export default InfoCard;
+export default InfoCart;

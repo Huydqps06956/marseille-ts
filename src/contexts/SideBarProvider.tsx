@@ -1,12 +1,9 @@
-import { cartApi } from '@api/cartService';
 import { createContext, useContext, useState, type ReactNode } from 'react';
 interface ISideBarContext {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
     type: string;
     setType: (type: TSideBar) => void;
-    handleGetCart: (userId: string, type: TSideBar) => void;
-    cart: Cart;
 }
 interface SideBarProviderProps {
     children: ReactNode;
@@ -21,24 +18,12 @@ export const SideBarProvider: React.FC<SideBarProviderProps> = ({
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [type, setType] = useState<TSideBar>('login');
-    const [cart, setCart] = useState<Cart>({
-        items: [],
-        total: 0
-    });
-    const handleGetCart = async (userId: string, t: TSideBar) => {
-        if (userId != '' && t === 'cart') {
-            const res = await cartApi.getCart();
-            setCart(res.data);
-        }
-    };
 
     const value: ISideBarContext = {
         isOpen,
         setIsOpen,
         type,
-        setType,
-        handleGetCart,
-        cart
+        setType
     };
     return (
         <SideBarContext.Provider value={value}>

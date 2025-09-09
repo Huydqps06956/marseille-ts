@@ -5,9 +5,9 @@ import { useSideBar } from '@contexts/SideBarProvider';
 import { useScrollHandling } from '@hooks/useScrollHandling';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
-import { BsCart3 } from 'react-icons/bs';
 import { SlHeart, SlReload } from 'react-icons/sl';
 import BoxIcon from './BoxIcon/BoxIcon';
+import CartHeader from './CartHeader';
 import Menu from './Menu/Menu';
 
 const Header = () => {
@@ -17,7 +17,7 @@ const Header = () => {
     const controls = useAnimation();
     const [isFixed, setIsFixed] = useState(false);
     const { scrollPosition } = useScrollHandling();
-    const { setIsOpen, setType, type, cart } = useSideBar();
+    const { setIsOpen, setType, type } = useSideBar();
     const handleOpenSideBar = (newType: TSideBar) => {
         type !== newType && setType(newType);
         setIsOpen(true);
@@ -86,18 +86,7 @@ const Header = () => {
                             className="cursor-pointer"
                             onClick={() => handleOpenSideBar('wishlist')}
                         />
-                        <div className="relative">
-                            <BsCart3
-                                size={20}
-                                className="cursor-pointer"
-                                onClick={() => handleOpenSideBar('cart')}
-                            />
-                            {cart.items.length > 0 && (
-                                <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] leading-none px-1.5 py-0.5 rounded-full">
-                                    {cart.items.length}
-                                </span>
-                            )}
-                        </div>
+                        <CartHeader onClick={handleOpenSideBar} />
                     </div>
                 </div>
             </div>

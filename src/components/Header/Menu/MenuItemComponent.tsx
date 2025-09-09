@@ -1,5 +1,6 @@
 import { useSideBar } from '@contexts/SideBarProvider';
 import { useStore } from '@contexts/StoreProvider';
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,11 +10,11 @@ interface MenuItemProps {
 }
 const MenuItemComponent: React.FC<MenuItemProps> = ({ href, title }) => {
     const { setIsOpen, setType } = useSideBar();
-    const { userInfo, isLoggedIn, handleLogout } = useStore();
+    const { userInfo, handleLogout } = useStore();
     const [isShowSubMenu, setIsShowSubMenu] = useState(false);
     const navigate = useNavigate();
     const handleClick = () => {
-        if (title === 'Sign In' && !isLoggedIn) {
+        if (title === 'Sign In' && !userInfo) {
             setType('login');
             setIsOpen(true);
         }
@@ -23,7 +24,7 @@ const MenuItemComponent: React.FC<MenuItemProps> = ({ href, title }) => {
     };
 
     const handleHover = () => {
-        if (title === 'Sign In' && isLoggedIn) {
+        if (title === 'Sign In' && userInfo) {
             return setIsShowSubMenu(true);
         }
     };

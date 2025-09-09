@@ -3,7 +3,7 @@ import Button from '@components/Button';
 import CountdownTimer from '@components/CountdownTimer/CountdownTimer';
 
 const OurShopBanner = () => {
-    const targetDate = '2025-07-31T23:59:59';
+    const targetDate = '2025-10-31T23:59:59';
 
     return (
         <div

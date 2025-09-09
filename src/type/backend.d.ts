@@ -30,6 +30,7 @@ declare global {
 
     interface ProductInCart {
         _id: string;
+        productId: string;
         size: string;
         quantity: number;
         price: number;

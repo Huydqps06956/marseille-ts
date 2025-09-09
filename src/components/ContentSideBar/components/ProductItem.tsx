@@ -5,18 +5,23 @@ import { useSideBar } from '@contexts/SideBarProvider';
 import { useCurrency } from '@hooks/useCurrency';
 interface Props {
     product: ProductInCart;
+    removeFromCart: (id: string, size: string) => Promise<Cart>;
+    loading: boolean;
 }
 
-const ProductItem: React.FC<Props> = ({ product }) => {
+const ProductItem: React.FC<Props> = ({ product, removeFromCart, loading }) => {
     const [isHover, setIsHover] = useState(false);
     const { type } = useSideBar();
     const formatCurrency = useCurrency();
 
+    const handleRemoveProduct = (id: string, size: string) => {
+        removeFromCart(id, size);
+    };
     return (
         <motion.div
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            className="mt-5 py-5 px-3 relative overflow-hidden flex items-start justify-center gap-5 hover:bg-[#f7f7f7] transition-all duration-200 ease-in-out"
+            className="mt-5 py-5 px-3 relative overflow-hidden flex items-start justify-start gap-5 hover:bg-[#f7f7f7] transition-all duration-200 ease-in-out"
         >
             <img
                 className="w-[70px] object-cover"
@@ -28,6 +33,9 @@ const ProductItem: React.FC<Props> = ({ product }) => {
                 animate={isHover ? { x: 0, opacity: 1 } : { x: 40, opacity: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="absolute top-2 right-2 cursor-pointer"
+                onClick={() =>
+                    handleRemoveProduct(product.productId, product.size)
+                }
             >
                 <IoCloseOutline size={24} />
             </motion.div>

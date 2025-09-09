@@ -15,5 +15,8 @@ export const cartApi = {
     },
     addProductToCart: (data: CartRequest) => {
         return axiosClient.post<CartResponse>(`/cart/add`, data);
+    },
+    removeFromCart: (productId: string, size: string) => {
+        return axiosClient.delete<CartResponse>(`/cart/${productId}/${size}`);
     }
 };

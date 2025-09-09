@@ -1,11 +1,14 @@
 import Button from '@components/Button';
 import ProductItem from '@components/ProductItem/ProductItem';
 import Spinner from '@components/Spiner';
+import { useCart } from '@contexts/CartProvider';
 import { useOurShop } from '@contexts/OurShopProvider';
 
 const ProductList = () => {
     const { products, isShowGrid, loading, total, handleLoadMoreProducts } =
         useOurShop();
+
+    const { addToCart, loading: loadingAddToCart } = useCart();
     return (
         <>
             <div
@@ -23,6 +26,8 @@ const ProductList = () => {
                         {...product}
                         isHomePage={false}
                         isShowGrid={isShowGrid}
+                        loading={loadingAddToCart}
+                        addToCart={addToCart}
                     />
                 ))}
             </div>
